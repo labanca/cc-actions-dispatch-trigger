@@ -9,6 +9,8 @@ jobs:
   all:
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
     - name: Check for changes in data/ folder
       id: check_changes
       run: |
