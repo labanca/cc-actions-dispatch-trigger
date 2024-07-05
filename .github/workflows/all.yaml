@@ -9,8 +9,10 @@ jobs:
   all:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v4
-    # Add steps to handle the dispatch event
-    - name: Run script
-      run: echo "Repository dispatch event triggered!"
+    - name: Trigger repository_dispatch in splor-mg/dados-link-obz-2025
+      run: |
+        curl -X POST \
+          -H "Accept: application/vnd.github.v3+json" \
+          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          https://api.github.com/repos/splor-mg/dados-link-obz-2025/dispatches \
+          -d '{"event_type":"trigger-workflow"}'
