@@ -16,6 +16,7 @@ jobs:
           echo "no changes" >> no_changes.txt
         else
           echo "changes" >> changes.txt
+        fi
     - name: Trigger repository_dispatch in labanca/cc-dispatch-dados-link-obz-2025
       run: |
         curl -X POST \
