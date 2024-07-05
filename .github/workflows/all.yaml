@@ -22,6 +22,7 @@ jobs:
           echo "changes" >> changes.txt
         fi
     - name: Trigger repository_dispatch in labanca/cc-dispatch-dados-link-obz-2025
+      if: steps.check_changes.outputs.changes == 'yes'
       run: |
         curl -X POST \
           -H "Accept: application/vnd.github.v3+json" \
