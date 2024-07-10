@@ -60,7 +60,7 @@ jobs:
         make publish
 
     - name: Get changed files 2
-      id: changes
+      id: changes2
       uses: tj-actions/changed-files@v35
       with:
         files: 'data/**'
