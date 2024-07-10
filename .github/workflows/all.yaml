@@ -13,7 +13,6 @@ jobs:
     steps:
     - name: Checkout repo
       uses: actions/checkout@v4
-      fetch-depth: 0
 
     - name: Get changed files 1
       id: changes
