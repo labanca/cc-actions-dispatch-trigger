@@ -13,6 +13,8 @@ jobs:
     steps:
     - name: Checkout repo
       uses: actions/checkout@v4
+      fetch-depth: 0
+
     - name: Get changed files 1
       id: changes
       uses: tj-actions/changed-files@v35
@@ -25,7 +27,7 @@ jobs:
         echo "Added files[1]: ${{ steps.changes.outputs.added_files }}"
         echo "Modified files[1]: ${{ steps.changes.outputs.modified_files }}"
         echo "Removed files[1]: ${{ steps.changes.outputs.removed_files }}"
-      push_depth: 0
+
 
 
 
@@ -70,7 +72,7 @@ jobs:
         echo "Added files[2]: ${{ steps.changes.outputs.added_files }}"
         echo "Modified files[2]: ${{ steps.changes.outputs.modified_files }}"
         echo "Removed files[2]: ${{ steps.changes.outputs.removed_files }}"
-      push_depth: 0
+
 
     - name: Workflow failure notification
       uses: JasonEtco/create-an-issue@v2
