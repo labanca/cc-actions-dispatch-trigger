@@ -36,11 +36,11 @@ jobs:
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
         # Create a dummy file
-        echo "This is a dummy file 3." > dummy3.txt
+        echo "This is a dummy file 4." > dummy4.txt
 
         # Add and commit the dummy file
-        git add dummy.txt
-        git commit -m "Add dummy file for testing"
+        git add dummy4.txt
+        git commit -m "Add dummy4 file for testing"
 
         # Output the repository URL and branch for debugging
         echo "Repository: ${{ github.repository }}"
