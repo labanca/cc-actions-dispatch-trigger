@@ -14,6 +14,7 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v4
 
+
     - name: Get changed files 1
       id: changes
       uses: tj-actions/changed-files@v35
@@ -28,36 +29,24 @@ jobs:
         echo "Removed files[1]: ${{ steps.changes.outputs.removed_files }}"
 
 
+    - name: Push some files inside the workflow run
+      run: |
+        # Configure Git
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
+        # Create a dummy file
+        echo "This is a dummy file." > dummy.txt
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
-    - name: Login to DockerHub
-      uses: docker/login-action@v3
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        # Add and commit the dummy file
+        git add dummy.txt
+        git commit -m "Add dummy file for testing"
 
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v5
-      with:
-        context: .
-        push: true
-        tags: fjuniorr/${{ github.event.repository.name }}:latest
-        cache-from: type=registry,ref=fjuniorr/${{ github.event.repository.name }}:latest
-        cache-to: type=inline
-    - name: ETL pipeline
-      run: docker run --rm --mount type=bind,source=${PWD},target=/project fjuniorr/${{ github.event.repository.name }} make all
-    - name: ETL pipeline notification
+        # Push changes
+        git push origin HEAD:${{ github.ref }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |-
-        docker run -e GITHUB_TOKEN=$GITHUB_TOKEN --rm --mount type=bind,source=${PWD},target=/project fjuniorr/${{ github.event.repository.name }} make notify
-    - name: Publish data package
-      run: |-
-        git config user.name "Automated"
-        git config user.email "actions@users.noreply.github.com"
-        make publish
+
 
     - name: Get changed files 2
       id: changes2
@@ -72,7 +61,6 @@ jobs:
         echo "Modified files[2]: ${{ steps.changes.outputs.modified_files }}"
         echo "Removed files[2]: ${{ steps.changes.outputs.removed_files }}"
 
-
     - name: Workflow failure notification
       uses: JasonEtco/create-an-issue@v2
       if: failure()
@@ -81,8 +69,6 @@ jobs:
         RUNID: ${{ github.run_id }}
       with:
         filename: .github/workflow-failure.md
-
-
 
     - name: Trigger repository_dispatch in labanca/cc-dispatch-dados-link-obz-2025
       if: steps.changes.outputs.any_changed == 'true'
