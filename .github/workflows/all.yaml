@@ -59,11 +59,11 @@ jobs:
         files: 'data/**'
     - name: Debug changed files
       run: |
-        echo "Any changed[2]: ${{ steps.changes.outputs.any_changed }}"
-        echo "All changed files[2]: ${{ steps.changes.outputs.all_changed_files }}"
-        echo "Added files[2]: ${{ steps.changes.outputs.added_files }}"
-        echo "Modified files[2]: ${{ steps.changes.outputs.modified_files }}"
-        echo "Removed files[2]: ${{ steps.changes.outputs.removed_files }}"
+        echo "Any changed[2]: ${{ steps.changes2.outputs.any_changed }}"
+        echo "All changed files[2]: ${{ steps2.changes.outputs.all_changed_files }}"
+        echo "Added files[2]: ${{ steps.changes2.outputs.added_files }}"
+        echo "Modified files[2]: ${{ steps.changes2.outputs.modified_files }}"
+        echo "Removed files[2]: ${{ steps.changes2.outputs.removed_files }}"
 
     - name: Trigger repository_dispatch in labanca/cc-dispatch-dados-link-obz-2025
       if: steps.changes.outputs.any_changed == 'true'
