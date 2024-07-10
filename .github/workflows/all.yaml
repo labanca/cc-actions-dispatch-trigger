@@ -31,7 +31,7 @@ jobs:
 
     - name: Push some files inside the workflow run
       env:
-        PAT_GITHUB: ${{ secrets.PAT_GITHUB }}
+        GH_PAT: ${{ secrets.GH_PAT }}
       run: |
         # Configure Git
         git config --global user.name "github-actions[bot]"
@@ -44,8 +44,13 @@ jobs:
         git add dummy.txt
         git commit -m "Add dummy file for testing"
 
+        # Output the repository URL and branch for debugging
+        echo "Repository: ${{ github.repository }}"
+        echo "Branch: ${{ github.ref }}"
+
         # Push changes using the PAT
-        git push https://x-access-token:${{ secrets.PAT_GITHUB }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }}
+        git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }}
+
 
 
     - name: Get changed files 2
