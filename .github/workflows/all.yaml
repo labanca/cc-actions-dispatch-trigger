@@ -45,7 +45,7 @@ jobs:
         # Push changes
         git push origin HEAD:${{ github.ref }}
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
 
 
     - name: Get changed files 2
@@ -60,15 +60,6 @@ jobs:
         echo "Added files[2]: ${{ steps.changes.outputs.added_files }}"
         echo "Modified files[2]: ${{ steps.changes.outputs.modified_files }}"
         echo "Removed files[2]: ${{ steps.changes.outputs.removed_files }}"
-
-    - name: Workflow failure notification
-      uses: JasonEtco/create-an-issue@v2
-      if: failure()
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        RUNID: ${{ github.run_id }}
-      with:
-        filename: .github/workflow-failure.md
 
     - name: Trigger repository_dispatch in labanca/cc-dispatch-dados-link-obz-2025
       if: steps.changes.outputs.any_changed == 'true'
