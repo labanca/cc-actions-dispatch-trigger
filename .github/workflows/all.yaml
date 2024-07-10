@@ -36,7 +36,7 @@ jobs:
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
         # Create a dummy file
-        echo "This is a dummy file." > dummy.txt
+        echo "This is a dummy file 2." > dummy.txt
 
         # Add and commit the dummy file
         git add dummy.txt
