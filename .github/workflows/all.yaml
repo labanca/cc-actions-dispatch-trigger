@@ -36,7 +36,7 @@ jobs:
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
         # Create a dummy file
-        echo "This is a dummy file 2." > dummy.txt
+        echo "This is a dummy file 3." > dummy3.txt
 
         # Add and commit the dummy file
         git add dummy.txt
@@ -57,10 +57,10 @@ jobs:
       uses: tj-actions/changed-files@v35
       with:
         files: 'data/**'
-    - name: Debug changed files
+    - name: Debug changed files 2
       run: |
         echo "Any changed[2]: ${{ steps.changes2.outputs.any_changed }}"
-        echo "All changed files[2]: ${{ steps2.changes.outputs.all_changed_files }}"
+        echo "All changed files[2]: ${{ steps.changes2.outputs.all_changed_files }}"
         echo "Added files[2]: ${{ steps.changes2.outputs.added_files }}"
         echo "Modified files[2]: ${{ steps.changes2.outputs.modified_files }}"
         echo "Removed files[2]: ${{ steps.changes2.outputs.removed_files }}"
