@@ -2,10 +2,7 @@ name: Updated
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron:  '01 9 * * 1-5'
-    - cron:  '01 15 * * 1-5'
-    - cron:  '01 18 * * 1-5'
+
 
 jobs:
   all:
